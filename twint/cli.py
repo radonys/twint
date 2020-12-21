@@ -69,10 +69,10 @@ def loadUserList(ul, _type):
     else:
         userlist = ul.split(",")
     if _type == "search":
-        un = ""
-        for user in userlist:
-            un += "%20OR%20from%3A" + user
-        return un[15:]
+        un = userlist[0]
+        for user in userlist[1:]:
+            un += " OR from:" + user
+        return un
     return userlist
 
 
@@ -106,6 +106,7 @@ def initialize(args):
     c.Database = args.database
     c.To = args.to
     c.All = args.all
+    c.Tor_guest = args.tor_guest
     c.Essid = args.essid
     c.Format = args.format
     c.User_full = args.user_full
@@ -212,6 +213,12 @@ def options():
         "-tl",
         "--timeline",
         help="Collects every tweet from a User's Timeline. (Tweets, RTs & Replies)",
+        action="store_true",
+    )
+    ap.add_argument(
+        "-tg",
+        "--tor-guest",
+        help="Use this if you want to use tor natively for requesting guest token from twitter.",
         action="store_true",
     )
     ap.add_argument("--translate",
