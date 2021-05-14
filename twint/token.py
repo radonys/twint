@@ -49,7 +49,7 @@ class Token:
                         with self._session as f:
                             logme.debug(__name__ + f":IP: {f.send(Request('GET', 'https://ident.me').prepare()).text}")
                     with self._session as f:
-                        res = f.send(twitter_request, proxies={"https": "http://127.0.0.1:24000").text
+                        res = f.send(twitter_request, proxies={"https": "http://127.0.0.1:24000"}).text
                 else:
                     res = requests.get(self.url, timeout=self._timeout).text
             except (CellTimeoutError, TimeoutError, requests.exceptions.ConnectTimeout) as exc:
